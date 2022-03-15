@@ -14,7 +14,7 @@ const User = require("../models/User");
 // @access  Public (anyone can make a user)
 router.post("/", async (req, res) => {
     // pull from req.body the name and email
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     // try to register user
     try {
@@ -27,7 +27,8 @@ router.post("/", async (req, res) => {
 
         // Creating new user
         user = new User({
-            name,
+            firstName,
+            lastName,
             email,
             password,
         });
@@ -60,7 +61,7 @@ router.post("/", async (req, res) => {
         );
     } catch (err) {
         console.error(err.message);
-        res.status(500).send("Server Error - Problem Registering User");
+        res.status(500).send("Server Error - Problem Registering User. Check the route.");
     }
 });
 
