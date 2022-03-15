@@ -2,6 +2,12 @@
 
 An app to browse dogs available for adoption using an instagram-like frontend UI along with the petfinder API for the backend.
 
+## How to add your mongoDB?
+
+-   Follow this [MongoDB Atlas Tutorial](https://www.freecodecamp.org/news/get-started-with-mongodb-atlas/)
+
+-   Add your mongoURI to `config/default.json`
+
 ## NPM Commands
 
 <code>npm install</code><br/>
