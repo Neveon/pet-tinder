@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
         // JSON Web Token - JWT
         const payload = {
             user: {
-                id: user.id,
+                id: user.id, // this is the mongo document ObjectID which can be used to find this unique user
             },
         };
 
@@ -56,7 +56,7 @@ router.post("/", async (req, res) => {
             },
             (err, token) => {
                 if (err) throw err;
-                res.json({ token }); // respond with the token
+                res.status(200).json({ token }); // respond with the token
             }
         );
     } catch (err) {
