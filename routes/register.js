@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
             payload,
             config.get("jwtSecret"),
             {
-                expiresIn: 3600, // 1hr - this is the same amount for petfinder api
+                expiresIn: 3500,
             },
             (err, token) => {
                 if (err) throw err;
