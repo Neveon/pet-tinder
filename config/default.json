@@ -1,4 +1,6 @@
 {
-    "mongoURI": "YOUR_MONGO_URI_HERE",
-    "jwtSecret": "secret"
+    "mongoURI": "mongodb+srv://admin:YXIfcu1sf7lEYUQ8@user-info.li187.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret": "secret",
+    "client_id": "PETFINDER_API_KEY",
+    "client_secret": "PETFINDER_SECRET_KEY"
 }
