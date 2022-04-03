@@ -63,13 +63,14 @@ router.post("/", [petfinderToken], async (req, res) => {
                 // Respond with app and petfinder tokens
                 res.status(200).json({
                     appToken: token,
+                    // petfinder access token is set in the request in the petfinderToken middleware
                     petfinderToken: "Bearer " + req.petfinderToken.access_token,
                 });
             }
         );
     } catch (err) {
         console.error(err.message);
-        res.status(500).send("Server Error - Problem Registering User. Check the route.");
+        res.status(500).send("Server Error - Problem Registering User.");
     }
 });
 
