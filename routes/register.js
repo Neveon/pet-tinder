@@ -9,10 +9,13 @@ const config = require("config");
 // mongoDB schema for a user
 const User = require("../models/User");
 
+// For making a petfinder token
+const petfinderToken = require("../middleware/petfinderToken");
+
 // @route   POST api/register
 // @desc    Register a user
 // @access  Public (anyone can make a user)
-router.post("/", async (req, res) => {
+router.post("/", [petfinderToken], async (req, res) => {
     // pull from req.body the name and email
     const { firstName, lastName, email, password } = req.body;
 
@@ -52,11 +55,16 @@ router.post("/", async (req, res) => {
             payload,
             config.get("jwtSecret"),
             {
-                expiresIn: 360000,
+                expiresIn: 3500,
             },
             (err, token) => {
                 if (err) throw err;
-                res.status(200).json({ token }); // respond with the token
+
+                // Respond with app and petfinder tokens
+                res.status(200).json({
+                    appToken: token,
+                    petfinderToken: "Bearer " + req.petfinderToken.access_token,
+                });
             }
         );
     } catch (err) {
