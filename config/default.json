@@ -1,5 +1,5 @@
 {
-    "mongoURI": "mongodb+srv://admin:YXIfcu1sf7lEYUQ8@user-info.li187.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "mongoURI": "MONGO_URI_GOES_HERE",
     "jwtSecret": "secret",
     "client_id": "PETFINDER_API_KEY",
     "client_secret": "PETFINDER_SECRET_KEY"
