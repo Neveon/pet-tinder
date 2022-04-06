@@ -14,6 +14,7 @@ app.use(express.json({ extended: false }));
 app.use("/api/register", require("./routes/register"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/terminate", require("./routes/terminate"));
+app.use("/api/like", require("./routes/like"));
 
 // Serve static assets in production build
 if (process.env.NODE_ENV === "production") {
