@@ -34,6 +34,7 @@ router.post("/", [petfinderToken], async (req, res) => {
             lastName,
             email,
             password,
+            likedPets: [],
         });
 
         // Encrypt the password
