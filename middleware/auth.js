@@ -16,7 +16,20 @@ module.exports = function (req, res, next) {
     }
 
     try {
-        const decoded = jwt.verify(token, config.get("jwtSecret"));
+        const decoded = jwt.verify(token, config.get("jwtSecret"), function (err, decoded) {
+            if (err) {
+                /*
+                err = {
+                    name: 'TokenExpiredError',
+                    message: 'jwt expired',
+                    expiredAt: 1408621000
+                }
+                */
+                return res.stats(401).json({ msg: `${err.name} - Please login again.` });
+            }
+
+            return decoded;
+        });
 
         // The payload looks like
         // {
