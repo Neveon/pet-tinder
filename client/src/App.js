@@ -7,28 +7,33 @@ import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 
+// Context
+import PetsState from "./context/pets/PetsState";
+
 // CSS
 import "./App.css";
 
 const App = () => {
     return (
-        <Router>
-            <Fragment>
-                <Navbar />
-                <div className="container">
-                    <Routes>
-                        {/* 
+        <PetsState>
+            <Router>
+                <Fragment>
+                    <Navbar />
+                    <div className="container">
+                        <Routes>
+                            {/* 
                             component was replaced with element in react-router-dom v6 
 
                             We also must call functional components, as functions not 
                             class components
                         */}
-                        <Route exact path="/" element={Home()} />
-                        <Route exact path="/about" element={About()} />
-                    </Routes>
-                </div>
-            </Fragment>
-        </Router>
+                            <Route exact path="/" element={Home()} />
+                            <Route exact path="/about" element={About()} />
+                        </Routes>
+                    </div>
+                </Fragment>
+            </Router>
+        </PetsState>
     );
 };
 
