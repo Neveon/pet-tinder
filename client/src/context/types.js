@@ -1,3 +1,4 @@
+export const GET_PETS = "GET_PETS";
 export const LIKE_PET = "LIKE_PET";
 export const DELETE_PET = "DELETE_PET";
 export const SET_CURRENT = "SET_CURRENT";

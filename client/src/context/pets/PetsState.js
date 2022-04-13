@@ -4,6 +4,7 @@ import PetsContext from "./petsContext";
 import petsReducer from "./petsReducer";
 
 import {
+    GET_PETS,
     LIKE_PET,
     DELETE_PET,
     SET_CURRENT,
@@ -103,15 +104,17 @@ const PetsState = (props) => {
 
     const [state, dispatch] = useReducer(petsReducer, initialState);
 
-    // Like Pet
+    // Get Pets from petfinder
+
+    // Like a Pet
 
     // Delete Liked Pet
 
-    // Set Current Pets
+    // Set Current Liked Pets
 
-    // Clear Current Pet
+    // Clear Current Pet ? Not sure if this is needed
 
-    // Filter Liked Pets ? or filter pets that come up from petfinder?
+    // Filter Pets ? As if I am filtering pets that come up from petfinder? Dont want to show already liked pets
 
     // Clear Filter
 
