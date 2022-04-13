@@ -19,7 +19,8 @@
     "config": "^3.3.7",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.6"
+    "mongoose": "^6.2.6",
+    "react-tinder-card": "^1.4.5"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
