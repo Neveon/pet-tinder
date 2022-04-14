@@ -71,10 +71,12 @@ const PetTinderStack = ({ pets }) => {
 
     return (
         <div className="tinderStack">
-            <h1>React Tinder Card</h1>
+            {/* <h1>PET TINDER</h1> */}
             <div className="cardContainer">
                 {pets.map((pet, index) => {
-                    // console.log(pet.photos);
+                    console.log(pet.name);
+                    console.log(pet.photos);
+                    console.log("\n\n");
                     return (
                         <TinderCard
                             ref={childRefs[index]}
@@ -87,7 +89,7 @@ const PetTinderStack = ({ pets }) => {
                                 style={{ backgroundImage: "url(" + pet.photos[0].full + ")" }}
                                 className="card"
                             >
-                                {/* <h3>{pet.name}</h3> */}
+                                <h3>{pet.name}</h3>
                             </div>
                         </TinderCard>
                     );
