@@ -88,12 +88,12 @@ const PetTinderStack = ({ pets }) => {
                 >
                     Swipe left!
                 </button>
-                <button
+                {/* <button
                     style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
                     onClick={() => goBack()}
                 >
                     Undo swipe!
-                </button>
+                </button> */}
                 <button
                     style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
                     onClick={() => swipe("right")}
@@ -106,7 +106,8 @@ const PetTinderStack = ({ pets }) => {
                     You swiped {lastDirection}
                 </h2>
             ) : (
-                <h2 className="infoText">Swipe a card or Undo!</h2>
+                // <h2 className="infoText">Swipe a card or Undo!</h2>
+                <h2 className="infoText">Swipe to Find your New Companion!</h2>
             )}
         </div>
     );
