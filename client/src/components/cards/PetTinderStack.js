@@ -1,6 +1,9 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useContext } from "react";
 import TinderCard from "react-tinder-card";
 import PropTypes from "prop-types";
+
+// To be able to add liked pets
+import PetsContext from "../../context/pets/PetsContext";
 
 // In home we filter() pets against the likedPets
 const PetTinderStack = ({ pets }) => {
@@ -9,7 +12,8 @@ const PetTinderStack = ({ pets }) => {
     // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex);
 
-    // console.log(pets.length);
+    // We use petsContext.likePet() when user swipes right
+    const petsContext = useContext(PetsContext);
 
     const childRefs = useMemo(
         () =>
@@ -29,9 +33,17 @@ const PetTinderStack = ({ pets }) => {
     const canSwipe = currentIndex >= 0;
 
     // set last direction and decrease current index
-    const swiped = (direction, nameToDelete, index) => {
+    const swiped = (direction, petToDelete, index) => {
         setLastDirection(direction);
         updateCurrentIndex(index - 1);
+
+        // If direction is "right" then we likePet()
+        if (direction === "right") {
+            // changed swiped(.., pet.name, ...) to pet so we get the whole object here
+            petsContext.likePet(petToDelete);
+
+            // We need to remove the pet from the stack if we allow undo
+        }
     };
 
     const outOfFrame = (name, idx) => {
@@ -68,7 +80,7 @@ const PetTinderStack = ({ pets }) => {
                             ref={childRefs[index]}
                             className="swipe"
                             key={pet.name}
-                            onSwipe={(dir) => swiped(dir, pet.name, index)}
+                            onSwipe={(dir) => swiped(dir, pet, index)}
                             onCardLeftScreen={() => outOfFrame(pet.name, index)}
                         >
                             <div

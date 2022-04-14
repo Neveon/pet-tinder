@@ -109,6 +109,9 @@ const PetsState = (props) => {
     // Get Pets from petfinder
 
     // Like a Pet
+    const likePet = (pet) => {
+        dispatch({ type: LIKE_PET, payload: pet });
+    };
 
     // Delete Liked Pet
 
@@ -125,6 +128,7 @@ const PetsState = (props) => {
             value={{
                 petsForAdoption: state.petsForAdoption,
                 likedPets: state.likedPets,
+                likePet,
             }}
         >
             {props.children}
