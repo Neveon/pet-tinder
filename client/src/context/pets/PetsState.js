@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 //import uuid from 'uuid';
-import PetsContext from "./petsContext";
+import PetsContext from "./PetsContext";
 import petsReducer from "./petsReducer";
 
 import {
@@ -17,7 +17,8 @@ import {
 
 const PetsState = (props) => {
     const initialState = {
-        likedPets: [
+        // pets adopted is filled every GET request to the petfinder api
+        petsForAdoption: [
             {
                 id: 55203150,
                 organization_id: "PA562",
@@ -100,6 +101,7 @@ const PetsState = (props) => {
                 },
             },
         ],
+        likedPets: [],
     };
 
     const [state, dispatch] = useReducer(petsReducer, initialState);
@@ -121,6 +123,7 @@ const PetsState = (props) => {
     return (
         <PetsContext.Provider
             value={{
+                petsForAdoption: state.petsForAdoption,
                 likedPets: state.likedPets,
             }}
         >
