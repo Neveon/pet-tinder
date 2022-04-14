@@ -18,6 +18,14 @@ const App = () => {
         <PetsState>
             <Router>
                 <Fragment>
+                    <link
+                        href="https://fonts.googleapis.com/css?family=Damion&display=swap"
+                        rel="stylesheet"
+                    />
+                    <link
+                        href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
+                        rel="stylesheet"
+                    />
                     <Navbar />
                     <div className="container">
                         <Routes>

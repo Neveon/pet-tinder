@@ -3,13 +3,13 @@ import TinderCard from "react-tinder-card";
 import PropTypes from "prop-types";
 
 // In home we filter() pets against the likedPets
-const PetTinderStack = (pets) => {
+const PetTinderStack = ({ pets }) => {
     const [currentIndex, setCurrentIndex] = useState(pets.length - 1);
     const [lastDirection, setLastDirection] = useState();
     // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex);
 
-    console.log(pets);
+    // console.log(pets.length);
 
     const childRefs = useMemo(
         () =>
@@ -58,33 +58,28 @@ const PetTinderStack = (pets) => {
     };
 
     return (
-        <div>
-            <link
-                href="https://fonts.googleapis.com/css?family=Damion&display=swap"
-                rel="stylesheet"
-            />
-            <link
-                href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
-                rel="stylesheet"
-            />
+        <div className="tinderStack">
             <h1>React Tinder Card</h1>
             <div className="cardContainer">
-                {pets.map((pet, index) => (
-                    <TinderCard
-                        ref={childRefs[index]}
-                        className="swipe"
-                        key={pet.name}
-                        onSwipe={(dir) => swiped(dir, pet.name, index)}
-                        onCardLeftScreen={() => outOfFrame(pet.name, index)}
-                    >
-                        <div
-                            style={{ backgroundImage: "url(" + pet.photos.full + ")" }}
-                            className="card"
+                {pets.map((pet, index) => {
+                    // console.log(pet.photos);
+                    return (
+                        <TinderCard
+                            ref={childRefs[index]}
+                            className="swipe"
+                            key={pet.name}
+                            onSwipe={(dir) => swiped(dir, pet.name, index)}
+                            onCardLeftScreen={() => outOfFrame(pet.name, index)}
                         >
-                            <h3>{pet.name}</h3>
-                        </div>
-                    </TinderCard>
-                ))}
+                            <div
+                                style={{ backgroundImage: "url(" + pet.photos[0].full + ")" }}
+                                className="card"
+                            >
+                                {/* <h3>{pet.name}</h3> */}
+                            </div>
+                        </TinderCard>
+                    );
+                })}
             </div>
             <div className="buttons">
                 <button
@@ -111,9 +106,7 @@ const PetTinderStack = (pets) => {
                     You swiped {lastDirection}
                 </h2>
             ) : (
-                <h2 className="infoText">
-                    Swipe a card or press a button to get Restore Card button visible!
-                </h2>
+                <h2 className="infoText">Swipe a card or Undo!</h2>
             )}
         </div>
     );
