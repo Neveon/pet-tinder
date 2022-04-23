@@ -38,7 +38,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 // @route   POST api/auth
-// @desc    When logging in we obtain a petfinder access token, verify the user & set a token that holds basic user info
+// @desc    LOGIN - When logging in we obtain a petfinder access token, verify the user & set a token that holds basic user info
 // @access  Public (authenticate to access private routes)
 router.post("/", [petfinderToken], async (req, res) => {
     // Get email and password from the post request body

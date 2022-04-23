@@ -22,7 +22,7 @@ router.post("/", auth, async (req, res) => {
         // In the case there is no user, 400 error
         if (!user) return res.status(400).json({ msg: "User not found" });
 
-        // Verify the client owns the found user account
+        // Verify the client (web app token) owns the found user account in DB
         // console.log(user);
         // console.log(req.user.id);
         if (user._id.toString() !== req.user.id) {
