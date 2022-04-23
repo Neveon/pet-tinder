@@ -7,13 +7,14 @@ import PetsContext from "../../context/pets/PetsContext";
 
 // In home we filter() pets against the likedPets
 const PetTinderStack = ({ pets }) => {
+    // We use petsContext.likePet() when user swipes right and update petsForAdoption
+    const petsContext = useContext(PetsContext);
+    const { likePet, updatePets } = petsContext;
+
     const [currentIndex, setCurrentIndex] = useState(pets.length - 1);
     const [lastDirection, setLastDirection] = useState();
     // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex);
-
-    // We use petsContext.likePet() when user swipes right
-    const petsContext = useContext(PetsContext);
 
     const childRefs = useMemo(
         () =>
@@ -28,7 +29,7 @@ const PetTinderStack = ({ pets }) => {
         currentIndexRef.current = val;
     };
 
-    const canGoBack = currentIndex < pets.length - 1;
+    // const canGoBack = currentIndex < pets.length - 1;
 
     const canSwipe = currentIndex >= 0;
 
@@ -38,12 +39,13 @@ const PetTinderStack = ({ pets }) => {
         updateCurrentIndex(index - 1);
 
         // If direction is "right" then we likePet()
-        if (direction === "right") {
-            // changed swiped(.., pet.name, ...) to pet so we get the whole object here
-            petsContext.likePet(petToDelete);
+        // if (direction === "right") {
+        //     // changed swiped(.., pet.name, ...) to pet so we get the whole object here
+        //     likePet(petToDelete);
+        //     updatePets(petToDelete.id);
 
-            // We need to remove the pet from the stack if we allow undo
-        }
+        //     // We need to remove the pet from the stack if we allow undo
+        // }
     };
 
     const outOfFrame = (name, idx) => {
@@ -58,25 +60,33 @@ const PetTinderStack = ({ pets }) => {
     const swipe = async (dir) => {
         if (canSwipe && currentIndex < pets.length) {
             await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
+
+            if (dir === "right") {
+                // changed swiped(.., pet.name, ...) to pet so we get the whole object here
+                likePet(pets[currentIndex]);
+                updatePets(pets[currentIndex].id);
+
+                // We need to remove the pet from the stack if we allow undo
+            }
         }
     };
 
     // increase current index and show card
-    const goBack = async () => {
-        if (!canGoBack) return;
-        const newIndex = currentIndex + 1;
-        updateCurrentIndex(newIndex);
-        await childRefs[newIndex].current.restoreCard();
-    };
+    // const goBack = async () => {
+    //     if (!canGoBack) return;
+    //     const newIndex = currentIndex + 1;
+    //     updateCurrentIndex(newIndex);
+    //     await childRefs[newIndex].current.restoreCard();
+    // };
 
     return (
         <div className="tinderStack">
             {/* <h1>PET TINDER</h1> */}
             <div className="cardContainer">
                 {pets.map((pet, index) => {
-                    console.log(pet.name);
-                    console.log(pet.photos);
-                    console.log("\n\n");
+                    // console.log(pet.name);
+                    // console.log(pet.photos);
+                    // console.log("\n\n");
                     return (
                         <TinderCard
                             ref={childRefs[index]}
