@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
+import LikedPets from "./components/pages/LikedPets";
 
 // Context
 import PetsState from "./context/pets/PetsState";
@@ -37,6 +38,7 @@ const App = () => {
                         */}
                             <Route exact path="/" element={Home()} />
                             <Route exact path="/about" element={About()} />
+                            <Route exact path="/liked" element={LikedPets()} />
                         </Routes>
                     </div>
                 </Fragment>

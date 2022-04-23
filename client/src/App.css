@@ -15,6 +15,19 @@
     padding: 0;
 }
 
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #ff0000;
+}
+
 body {
     font-family: "Roboto", sans-serif;
     font-size: 1rem;
@@ -496,10 +509,9 @@ h2 {
 
 .swipe {
     position: absolute;
-    /* left: 32%; */
     /* transform: translate(0, -50); */
-    margin: auto;
-    width: auto;
+    /* margin: auto;
+    width: auto; */
 }
 
 .cardContainer {
@@ -520,7 +532,7 @@ h2 {
     border-radius: 20px;
     background-size: cover;
     background-position: center;
-    margin: auto;
+    /* margin: auto; */
 }
 
 .cardContent {
