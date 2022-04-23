@@ -3,17 +3,7 @@ import React, { useReducer } from "react";
 import PetsContext from "./PetsContext";
 import petsReducer from "./petsReducer";
 
-import {
-    GET_PETS,
-    LIKE_PET,
-    DELETE_PET,
-    SET_CURRENT,
-    CLEAR_CURRENT,
-    FILTER_PETS,
-    CLEAR_FILTER,
-    SET_ALERT,
-    REMOVE_ALERT,
-} from "../types";
+import { GET_PETS, LIKE_PET, DELETE_PET, SET_ALERT, REMOVE_ALERT, UPDATE_PETS } from "../types";
 
 const PetsState = (props) => {
     const initialState = {
@@ -114,14 +104,20 @@ const PetsState = (props) => {
     };
 
     // Delete Liked Pet
+    const deletePet = (id) => {
+        // console.log("PetState.js - Deleting Pet:");
+        // console.log(id);
+        dispatch({ type: DELETE_PET, payload: id });
+    };
 
-    // Set Current Liked Pets
+    // Update pets for adoption
+    const updatePets = (id) => {
+        dispatch({ type: UPDATE_PETS, payload: id });
+    };
 
-    // Clear Current Pet ? Not sure if this is needed
+    // Set alert
 
-    // Filter Pets ? As if I am filtering pets that come up from petfinder? Dont want to show already liked pets
-
-    // Clear Filter
+    // Delete alert
 
     return (
         <PetsContext.Provider
@@ -129,6 +125,8 @@ const PetsState = (props) => {
                 petsForAdoption: state.petsForAdoption,
                 likedPets: state.likedPets,
                 likePet,
+                deletePet,
+                updatePets,
             }}
         >
             {props.children}
