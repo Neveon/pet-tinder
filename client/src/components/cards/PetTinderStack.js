@@ -29,7 +29,7 @@ const PetTinderStack = ({ pets }) => {
         currentIndexRef.current = val;
     };
 
-    const canGoBack = currentIndex < pets.length - 1;
+    // const canGoBack = currentIndex < pets.length - 1;
 
     const canSwipe = currentIndex >= 0;
 
@@ -39,13 +39,13 @@ const PetTinderStack = ({ pets }) => {
         updateCurrentIndex(index - 1);
 
         // If direction is "right" then we likePet()
-        if (direction === "right") {
-            // changed swiped(.., pet.name, ...) to pet so we get the whole object here
-            likePet(petToDelete);
-            updatePets(petToDelete.id);
+        // if (direction === "right") {
+        //     // changed swiped(.., pet.name, ...) to pet so we get the whole object here
+        //     likePet(petToDelete);
+        //     updatePets(petToDelete.id);
 
-            // We need to remove the pet from the stack if we allow undo
-        }
+        //     // We need to remove the pet from the stack if we allow undo
+        // }
     };
 
     const outOfFrame = (name, idx) => {
@@ -60,6 +60,14 @@ const PetTinderStack = ({ pets }) => {
     const swipe = async (dir) => {
         if (canSwipe && currentIndex < pets.length) {
             await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
+
+            if (dir === "right") {
+                // changed swiped(.., pet.name, ...) to pet so we get the whole object here
+                likePet(pets[currentIndex]);
+                updatePets(pets[currentIndex].id);
+
+                // We need to remove the pet from the stack if we allow undo
+            }
         }
     };
 
@@ -73,10 +81,12 @@ const PetTinderStack = ({ pets }) => {
 
     return (
         <div className="tinderStack">
-            <h1>React Tinder Card</h1>
+            {/* <h1>PET TINDER</h1> */}
             <div className="cardContainer">
                 {pets.map((pet, index) => {
+                    // console.log(pet.name);
                     // console.log(pet.photos);
+                    // console.log("\n\n");
                     return (
                         <TinderCard
                             ref={childRefs[index]}
@@ -89,7 +99,7 @@ const PetTinderStack = ({ pets }) => {
                                 style={{ backgroundImage: "url(" + pet.photos[0].full + ")" }}
                                 className="card"
                             >
-                                {/* <h3>{pet.name}</h3> */}
+                                <h3>{pet.name}</h3>
                             </div>
                         </TinderCard>
                     );
