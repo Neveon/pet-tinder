@@ -29,7 +29,7 @@ const PetBar = ({ animal }) => {
             </div>
             <div className="icon">
                 <a href={url} target="_blank" rel="noopener noreferrer">
-                    <img src={photo} />
+                    <img src={photo} alt={name} />
                 </a>
             </div>
             <div className="item breed">
