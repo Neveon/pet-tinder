@@ -31,7 +31,7 @@ const Home = () => {
 
     return (
         <PetsContext.Consumer>
-            {(value) => <div className="">{<PetTinderStack pets={filterPets(value)} />}</div>}
+            {(value) => <div className="home">{<PetTinderStack pets={filterPets(value)} />}</div>}
         </PetsContext.Consumer>
     );
 };

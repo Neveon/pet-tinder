@@ -8,44 +8,49 @@ import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
+import LikedPets from "./components/pages/LikedPets";
 
 // Context
 import PetsState from "./context/pets/PetsState";
+import AuthState from "./context/auth/AuthState";
 
 // CSS
 import "./App.css";
 
 const App = () => {
     return (
-        <PetsState>
-            <Router>
-                <Fragment>
-                    <link
-                        href="https://fonts.googleapis.com/css?family=Damion&display=swap"
-                        rel="stylesheet"
-                    />
-                    <link
-                        href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
-                        rel="stylesheet"
-                    />
-                    <Navbar />
-                    <div className="container">
-                        <Routes>
-                            {/* 
+        <AuthState>
+            <PetsState>
+                <Router>
+                    <Fragment>
+                        <link
+                            href="https://fonts.googleapis.com/css?family=Damion&display=swap"
+                            rel="stylesheet"
+                        />
+                        <link
+                            href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
+                            rel="stylesheet"
+                        />
+                        <Navbar />
+                        <div className="container">
+                            <Routes>
+                                {/* 
                             component was replaced with element in react-router-dom v6 
 
                             We also must call functional components, as functions not 
                             class components
                         */}
-                            <Route exact path="/" element={Home()} />
-                            <Route exact path="/about" element={About()} />
-                            <Route exact path="/login" element={Login()} />
-                            <Route exact path="/register" element={Register()} />
-                        </Routes>
-                    </div>
-                </Fragment>
-            </Router>
-        </PetsState>
+                                <Route exact path="/" element={Home()} />
+                                <Route exact path="/about" element={About()} />
+                                <Route exact path="/login" element={Login()} />
+                                <Route exact path="/register" element={Register()} />
+                                <Route exact path="/liked" element={LikedPets()} />
+                            </Routes>
+                        </div>
+                    </Fragment>
+                </Router>
+            </PetsState>
+        </AuthState>
     );
 };
 
