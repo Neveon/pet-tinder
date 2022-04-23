@@ -17,5 +17,7 @@ export default (state, action) => {
                 ...state,
                 petsForAdoption: state.petsForAdoption.filter((pet) => pet.id !== action.payload),
             };
+        default:
+            return state;
     }
 };
