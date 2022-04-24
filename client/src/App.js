@@ -41,10 +41,7 @@ const App = () => {
                                     {/* 
                                     component was replaced with element in react-router-dom v6 
 
-                                    We also must call functional components, as functions not 
-                                    class components
-                                    */}
-                                    {/* Due to react-router-dom update for v6, I shouldnt do element={Register()}
+                                    Due to react-router-dom update for v6, I shouldnt do element={Register()}
                                         In order for context to be able to be passed I need to use element={<Register/>} */}
                                     <Route exact path="/" element={<Home />} />
                                     <Route exact path="/about" element={<About />} />
