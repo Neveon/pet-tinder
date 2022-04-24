@@ -36,4 +36,4 @@ Run both the server and frontend client.
 
 #### Things I Learned
 
-Due to `react-router-dom` being updated to v6, `component` was replaced with `element`. In order to be able to use `Context.Provider`, the global state, I need to set `element={<someComponent/>}` and **NOT AS** `element={someComponent()}` otherwise `useContext()` will always return undefined for `someComponent`.
+Due to `react-router-dom` being updated to v6, for `<Route>`, `component` was replaced with `element`. In order to be able to use `Context.Provider`, the global state, I need to set `element={<someComponent/>}` and **NOT AS** `element={someComponent()}` otherwise `useContext()` will always return undefined for `someComponent`.
