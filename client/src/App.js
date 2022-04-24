@@ -44,11 +44,13 @@ const App = () => {
                                     We also must call functional components, as functions not 
                                     class components
                                     */}
-                                    <Route exact path="/" element={Home()} />
-                                    <Route exact path="/about" element={About()} />
-                                    <Route exact path="/login" element={Login()} />
-                                    <Route exact path="/register" element={Register()} />
-                                    <Route exact path="/liked" element={LikedPets()} />
+                                    {/* Due to react-router-dom update for v6, I shouldnt do element={Register()}
+                                        In order for context to be able to be passed I need to use element={<Register/>} */}
+                                    <Route exact path="/" element={<Home />} />
+                                    <Route exact path="/about" element={<About />} />
+                                    <Route exact path="/login" element={<Login />} />
+                                    <Route exact path="/register" element={<Register />} />
+                                    <Route exact path="/liked" element={<LikedPets />} />
                                 </Routes>
                             </div>
                         </Fragment>
