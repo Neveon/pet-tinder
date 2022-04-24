@@ -1,12 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
-// import AlertContext from '../../context/alert/alertContext';
+import AlertContext from "../../context/alert/alertContext";
 // import AuthContext from '../../context/auth/authContext';
 
-const Register = (props) => {
-    //   const alertContext = useContext(AlertContext);
+const Register = () => {
+    /* ALERT CONTEXT DOES NOT WORK - JUST USE JS alert() */
+    // console.log(AlertContext);
+    // const alertContext = useContext(AlertContext);
+    // const alertContext = useContext(AlertContext);
     //   const authContext = useContext(AuthContext);
+    // console.log(alertContext);
+    // const setAlert = alertContext;
+    /* *************************************** ******************************* */
 
-    //   const { setAlert } = alertContext;
     //   const { register, error, clearErrors, isAuthenticated } = authContext;
 
     //   useEffect(() => {
@@ -43,14 +48,14 @@ const Register = (props) => {
         } else if (password !== password2) {
             // setAlert("Passwords do not match", "danger");
             alert("Passwords do not match", "danger");
+        } else {
+            console.log("Register submit");
+            // register({
+            //     name,
+            //     email,
+            //     password,
+            // });
         }
-        // } else {
-        //     register({
-        //         name,
-        //         email,
-        //         password,
-        //     });
-        // }
     };
 
     return (
