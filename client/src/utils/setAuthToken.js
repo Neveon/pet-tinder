@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// destructure response token
+// destructure response token and set as default axios headers for all requests (common)
 const setAuthToken = ({ appToken, petfinderToken }) => {
     // console.log("Destructured Token values:");
     // console.log(appToken);
