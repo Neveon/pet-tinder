@@ -15,14 +15,28 @@ import Alerts from "./components/layout/Alerts";
 import PetsState from "./context/pets/PetsState";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
+import setAuthToken from "./utils/setAuthToken";
 
 // CSS
 import "./App.css";
 
+// load token into global headers
+if (localStorage.appToken && localStorage.petfinderToken) {
+    let token = {
+        appToken: localStorage.appToken,
+        petfinderToken: localStorage.petfinderToken,
+    };
+
+    // token gets destructred in setAuthToken
+    setAuthToken(token);
+} else {
+    console.log("App has attempted to load token into global headers and failed...");
+}
+
 const App = () => {
     return (
-        <AuthState>
-            <PetsState>
+        <PetsState>
+            <AuthState>
                 <AlertState>
                     <Router>
                         <Fragment>
@@ -53,8 +67,8 @@ const App = () => {
                         </Fragment>
                     </Router>
                 </AlertState>
-            </PetsState>
-        </AuthState>
+            </AuthState>
+        </PetsState>
     );
 };
 
