@@ -1,6 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import AlertContext from "../../context/alert/AlertContext";
+import AuthContext from "../../context/auth/authContext";
+
+// For redirection
+import { useNavigate } from "react-router";
 
 const Login = (props) => {
+    const alertContext = useContext(AlertContext);
+    const authContext = useContext(AuthContext);
+
+    const { setAlert } = alertContext;
+    const { login, error, clearErrors, isAuthenticated } = authContext;
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // redirect to homepage if user is authenticated
+        if (isAuthenticated) {
+            console.log("Attempting to redirect after authentication is verfied");
+            navigate("/");
+        }
+
+        if (error === "Invalid Credentials") {
+            setAlert(error, "danger");
+            clearErrors();
+        }
+    });
+
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -16,7 +42,12 @@ const Login = (props) => {
         e.preventDefault();
         if (email === "" || password === "") {
             // setAlert("Please enter all fields", "danger");
-            alert("Please enter all fields", "danger");
+            setAlert("Please fill in all fields", "danger");
+        } else {
+            login({
+                email,
+                password,
+            });
         }
     };
 
