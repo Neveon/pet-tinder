@@ -1,35 +1,41 @@
 import React, { useState, useContext, useEffect } from "react";
 import AlertContext from "../../context/alert/AlertContext";
-// import AuthContext from '../../context/auth/authContext';
+import AuthContext from "../../context/auth/authContext";
+
+// v6 update: For redirection after successful registration
+import { useNavigate } from "react-router";
 
 const Register = (props) => {
     const alertContext = useContext(AlertContext);
+    const authContext = useContext(AuthContext);
+
     const { setAlert } = alertContext;
+    const { register, error, clearErrors, isAuthenticated } = authContext;
 
-    //   const authContext = useContext(AuthContext);
-    //   const { register, error, clearErrors, isAuthenticated } = authContext;
+    const navigate = useNavigate();
 
-    //   useEffect(() => {
-    //     if (isAuthenticated) {
-    //       // Redirect to homepage
-    //       props.history.push('/');
-    //     }
+    useEffect(() => {
+        // redirect to homepage (tinder cards) if the user is already authenticated
+        if (isAuthenticated) {
+            navigate("/");
+        }
 
-    //     if (error === 'User already exists') {
-    //       setAlert(error, 'danger');
-    //       clearErrors();
-    //     }
-    //     // eslint-disable-next-line
-    //   }, [error, isAuthenticated, props.history]);
+        if (error === "A user with that email already exists") {
+            setAlert(error, "danger");
+            clearErrors();
+        }
+        // eslint-disable-next-line
+    }, [error, isAuthenticated, props.history]);
 
     const [user, setUser] = useState({
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         password: "",
         password2: "",
     });
 
-    const { name, email, password, password2 } = user;
+    const { firstName, lastName, email, password, password2 } = user;
 
     const onChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -37,19 +43,20 @@ const Register = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (name === "" || email === "" || password === "") {
+        if (firstName === "" || lastName === "" || email === "" || password === "") {
             setAlert("Please enter all fields", "danger");
             // alert("Please enter all fields", "danger");
         } else if (password !== password2) {
             setAlert("Passwords do not match", "danger");
             // alert("Passwords do not match", "danger");
         } else {
-            console.log("Register submit");
-            // register({
-            //     name,
-            //     email,
-            //     password,
-            // });
+            // console.log("Register submit");
+            register({
+                firstName,
+                lastName,
+                email,
+                password,
+            });
         }
     };
 
@@ -61,8 +68,24 @@ const Register = (props) => {
 
             <form onSubmit={onSubmit}>
                 <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" name="name" value={name} onChange={onChange} required />
+                    <label htmlFor="name">First Name</label>
+                    <input
+                        type="text"
+                        name="firstName"
+                        value={firstName}
+                        onChange={onChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="name">Last Name</label>
+                    <input
+                        type="text"
+                        name="lastName"
+                        value={lastName}
+                        onChange={onChange}
+                        required
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="email">Email Address</label>

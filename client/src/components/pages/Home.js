@@ -1,31 +1,23 @@
-import React /*, { Fragment, useContext, useEffect, useState }*/ from "react";
+import React, { useContext, useEffect } from "react";
 import PetTinderStack from "../cards/PetTinderStack";
 import PetsContext from "../../context/pets/PetsContext";
+import AuthContext from "../../context/auth/authContext";
 
 const Home = () => {
-    // Access to actions
-    // const petsContext = useContext(PetsContext);
+    const { loadUser } = useContext(AuthContext);
 
-    // Pets state
-    // const { petsForAdoption, likedPets } = petsContext;
-
-    // useEffect(() => {
-    //     // exclude likedPets from appearing in petsForAdoption
-    //     setPets(petsForAdoption.filter((pet) => !likedPets.includes(pet)));
-    //     console.log(pets);
-
-    //     // Update pets array for tinder card stack
-    //     // everytime petsForAdoption array is updated
-    // }, [petsForAdoption, pets, likedPets]);
+    // When this component loads we will look at the token,
+    // go to backend to validate it
+    // then put it in user state
+    useEffect(() => {
+        console.log("Homepage is attempting to load user data...");
+        loadUser();
+        // eslint-disable-next-line
+    }, []);
 
     const filterPets = (state) => {
-        // console.log("This is the state");
-        // console.log(state);
-        // console.log();
         // exclude likedPets from appearing in petsForAdoption
         let petStack = state.petsForAdoption.filter((pet) => !state.likedPets.includes(pet));
-        // console.log(petStack);
-        // console.log("End of Home.js");
         return petStack;
     };
 

@@ -8,10 +8,12 @@ const config = require("config");
 // export the function
 module.exports = function (req, res, next) {
     // Get token from header
-    const token = req.header("x-auth-token");
+    const token = req.header("appToken");
 
     // Check if there is no token
     if (!token) {
+        console.log("Server cannot find token\nToken:\n");
+        console.log(req.header);
         return res.status(401).json({ msg: "Please login first. Authorization Denied." });
     }
 
