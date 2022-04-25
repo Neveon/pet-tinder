@@ -19,19 +19,29 @@ export default (state, action) => {
                 user: action.payload,
             };
         case REGISTER_SUCCESS:
-            let { appToken, petfinderToken } = action.payload;
-            localStorage.setItem("appToken", appToken);
-            localStorage.setItem("petfinderToken", petfinderToken);
+            localStorage.setItem("appToken", action.payload.appToken);
+            localStorage.setItem("petfinderToken", action.payload.petfinderToken);
             return {
                 ...state,
-                // ...action.payload, // token in state as object {token: tokenHere}
-                appToken,
-                petfinderToken,
+                appToken: action.payload.appToken,
+                petfinderToken: action.payload.petfinderToken,
+                isAuthenticated: true,
+                loading: false,
+            };
+        case LOGIN_SUCCESS:
+            // placing token in local storage
+            localStorage.setItem("appToken", action.payload.appToken);
+            localStorage.setItem("petfinderToken", action.payload.petfinderToken);
+            return {
+                ...state,
+                appToken: action.payload.appToken,
+                petfinderToken: action.payload.petfinderToken,
                 isAuthenticated: true,
                 loading: false,
             };
         case REGISTER_FAIL:
         case AUTH_ERROR:
+        case LOGIN_FAIL:
             localStorage.removeItem("appToken");
             localStorage.removeItem("petfinderToken");
             return {
