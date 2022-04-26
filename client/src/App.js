@@ -10,6 +10,7 @@ import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import LikedPets from "./components/pages/LikedPets";
 import Alerts from "./components/layout/Alerts";
+import PrivateRoute from "./components/routing/PrivateRoute";
 
 // Context
 import PetsState from "./context/pets/PetsState";
@@ -28,6 +29,7 @@ if (localStorage.appToken && localStorage.petfinderToken) {
     };
 
     // token gets destructred in setAuthToken
+    console.log("App.js calls setAuthToken..");
     setAuthToken(token);
 } else {
     console.log("App has attempted to load token into global headers and failed...");
@@ -57,11 +59,27 @@ const App = () => {
 
                                     Due to react-router-dom update for v6, I shouldnt do element={Register()}
                                         In order for context to be able to be passed I need to use element={<Register/>} */}
-                                    <Route exact path="/" element={<Home />} />
+                                    <Route
+                                        exact
+                                        path="/"
+                                        element={
+                                            <PrivateRoute>
+                                                <Home />
+                                            </PrivateRoute>
+                                        }
+                                    />
                                     <Route exact path="/about" element={<About />} />
                                     <Route exact path="/login" element={<Login />} />
                                     <Route exact path="/register" element={<Register />} />
-                                    <Route exact path="/liked" element={<LikedPets />} />
+                                    <Route
+                                        exact
+                                        path="/liked"
+                                        element={
+                                            <PrivateRoute>
+                                                <LikedPets />
+                                            </PrivateRoute>
+                                        }
+                                    />
                                 </Routes>
                             </div>
                         </Fragment>
