@@ -40,13 +40,9 @@ const AuthState = (props) => {
                 appToken: localStorage.appToken,
                 petfinderToken: localStorage.petfinderToken,
             };
-            // console.log("loadUser from AuthState has the token:");
-            // console.log(token);
-            // console.log("Sending this to setAuthToken as global headers...");
             setAuthToken(token);
         } else {
             console.log("AuthState loadUser() has failed to get local storage tokens...\n");
-            console.log(localStorage);
         }
 
         try {
@@ -97,6 +93,8 @@ const AuthState = (props) => {
         try {
             const res = await axios.post("/api/auth", formData, config);
 
+            console.log("successful login:");
+            console.log(res.data);
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: res.data, // response is token
@@ -113,7 +111,7 @@ const AuthState = (props) => {
 
     // Logout
     const logout = () => {
-        console.log("logout");
+        dispatch({ type: LOGOUT });
     };
 
     // Clear Errors
