@@ -13,7 +13,6 @@ module.exports = function (req, res, next) {
     // Check if there is no token
     if (!token) {
         console.log("Server cannot find token\nToken:\n");
-        console.log(req.header);
         return res.status(401).json({ msg: "Please login first. Authorization Denied." });
     }
 

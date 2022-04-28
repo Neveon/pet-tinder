@@ -4,14 +4,18 @@ import { Link } from "react-router-dom";
 
 // Context
 import AuthContext from "../../context/auth/authContext";
+import PetsContext from "../../context/pets/PetsContext";
 
 const Navbar = ({ title, icon }) => {
     const authContext = useContext(AuthContext);
+    const petsContext = useContext(PetsContext);
 
     const { isAuthenticated, logout, user } = authContext;
+    const { clearPets } = petsContext;
 
     const onLogout = () => {
         logout();
+        clearPets();
     };
 
     const authLinks = (

@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import PetBar from "../cards/PetBar";
 
 // Context
 import PetsContext from "../../context/pets/PetsContext";
 
 const LikedPets = () => {
+    const { getLikedPets } = useContext(PetsContext);
+
+    useEffect(() => {
+        // Get liked pets from mongodb
+        getLikedPets();
+
+        // eslint-disable-next-line
+    }, []);
+
     return (
         <PetsContext.Consumer>
             {(value) => {

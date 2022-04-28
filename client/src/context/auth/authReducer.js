@@ -15,7 +15,7 @@ export default (state, action) => {
             return {
                 ...state,
                 isAuthenticated: true,
-                loading: false,
+                authLoading: false,
                 user: action.payload,
             };
         case REGISTER_SUCCESS:
@@ -26,7 +26,7 @@ export default (state, action) => {
                 appToken: action.payload.appToken,
                 petfinderToken: action.payload.petfinderToken,
                 isAuthenticated: true,
-                loading: false,
+                authLoading: false,
             };
         case LOGIN_SUCCESS:
             // placing token in local storage
@@ -37,7 +37,7 @@ export default (state, action) => {
                 appToken: action.payload.appToken,
                 petfinderToken: action.payload.petfinderToken,
                 isAuthenticated: true,
-                loading: false,
+                authLoading: false,
             };
         case REGISTER_FAIL:
         case AUTH_ERROR:
@@ -50,7 +50,7 @@ export default (state, action) => {
                 appToken: null,
                 petfinderToken: null,
                 isAuthenticated: false,
-                loading: false,
+                authLoading: false,
                 user: null,
                 error: action.payload,
             };

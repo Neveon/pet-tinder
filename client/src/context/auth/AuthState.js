@@ -24,7 +24,7 @@ const AuthState = (props) => {
         appToken: localStorage.getItem("appToken"),
         petfinderToken: localStorage.getItem("petfinderToken"),
         isAuthenticated: null,
-        loading: true,
+        authLoading: true,
         user: null,
         error: null,
     };
@@ -43,17 +43,26 @@ const AuthState = (props) => {
             setAuthToken(token);
         } else {
             console.log("AuthState loadUser() has failed to get local storage tokens...\n");
+            return;
         }
 
         try {
-            const res = await axios.get("/api/auth");
+            const res = await axios.get("/api/auth").then(({ data }) => {
+                console.log(data);
 
-            // res.data is the user data
-            dispatch({ type: USER_LOADED, payload: res.data });
+                // res.data is the user data
+                dispatch({ type: USER_LOADED, payload: data });
 
-            // ADD likedPets to global state likedPets
-            res.data.likedPets.map((pet) => likePet(pet));
+                // getLikedPets() from PetsContext does this already
+                // ------- DEPRECATED -------
+                // ADD likedPets to global state likedPets
+                // if (data.likedPets.length > 0) {
+                //     data.likedPets.map((pet) => likePet(pet));
+                // }
+            });
         } catch (err) {
+            console.log("loadUser error");
+            console.log(err);
             dispatch({ type: AUTH_ERROR });
         }
     };
@@ -91,16 +100,16 @@ const AuthState = (props) => {
         };
 
         try {
-            const res = await axios.post("/api/auth", formData, config);
-
-            console.log("successful login:");
-            console.log(res.data);
-            dispatch({
-                type: LOGIN_SUCCESS,
-                payload: res.data, // response is token
+            const res = await axios.post("/api/auth", formData, config).then((res) => {
+                console.log("successful login:");
+                console.log(res.data);
+                dispatch({
+                    type: LOGIN_SUCCESS,
+                    payload: res.data, // response is token
+                });
             });
 
-            loadUser();
+            // loadUser();
         } catch (err) {
             dispatch({
                 type: LOGIN_FAIL,
@@ -125,7 +134,7 @@ const AuthState = (props) => {
                 appToken: state.appToken,
                 petfinderToken: state.petfinderToken,
                 isAuthenticated: state.isAuthenticated,
-                loading: state.loading,
+                authLoading: state.authLoading,
                 user: state.user,
                 error: state.error,
                 register,
