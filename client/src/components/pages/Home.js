@@ -27,8 +27,8 @@ const Home = () => {
         console.log("Homepage is attempting to load user data...");
         loadUser();
 
-        getLikedPets(); // loading = true : even after these next 2 functions
-        getPetsForAdoption(); // loading is false if likedPets is empty from user other loading is true
+        getLikedPets();
+        getPetsForAdoption(); // loading is false (finished) after this function
 
         // eslint-disable-next-line
     }, []);
