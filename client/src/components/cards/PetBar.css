@@ -23,6 +23,10 @@
     flex: 1;
     justify-content: center;
 }
+.capsule .x:hover {
+    color: red;
+}
+
 .capsule .breed {
     border-left: none;
 }

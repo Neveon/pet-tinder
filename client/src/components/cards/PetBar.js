@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
 
+// Layout
+import DogPlaceholder from "../layout/placeholder_dog.jpg";
+
 // Context
 import PetsContext from "../../context/pets/PetsContext";
 
@@ -12,7 +15,12 @@ const PetBar = ({ animal }) => {
 
     const { name, url, id } = animal;
     const breed = animal.breeds.primary;
-    const photo = animal.photos[0].full;
+    let photo;
+    if (animal.photos && animal.photos[0] && animal.photos[0].full) {
+        photo = animal.photos[0].full;
+    } else {
+        photo = DogPlaceholder;
+    }
 
     const removePet = () => {
         // delete from DB using id
@@ -45,7 +53,9 @@ const PetBar = ({ animal }) => {
             {/* <div className="item weight">420lbs</div> */}
             {/* <div className="item age">96 years old</div> */}
             <div className="item x" onClick={removePet}>
-                <span>X</span>
+                <span>
+                    <b>X</b>
+                </span>
             </div>
             <div></div>
         </div>

@@ -55,7 +55,7 @@ const PetsState = (props) => {
 
             const res = await axios
                 .get(
-                    "https://api.petfinder.com/v2/animals?location=07036&distance=100&type=Dog&page=1&limit=10"
+                    "https://api.petfinder.com/v2/animals?location=07036&distance=100&type=Dog&page=1&limit=50"
                 )
                 .then((res) => {
                     // Add appToken back after request to petfinder
@@ -64,7 +64,7 @@ const PetsState = (props) => {
                     console.log("Response from petfinder API:");
                     console.log(res.data.animals);
 
-                    // Might have to clean the data filtering any id's found
+                    // Might have to clean the data filtering any id's already found
                     let IDs = {};
                     let cleanData = [];
                     // map through data

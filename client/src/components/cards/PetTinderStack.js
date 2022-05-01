@@ -24,13 +24,16 @@ const PetTinderStack = () => {
         petsForAdoption,
     } = petsContext;
 
-    console.log(`The length of pets for adoption is: ${petsForAdoption.length}`); // 1
+    console.log("pet stack is:");
+    console.log(petsForAdoption.length);
+
+    // console.log(`The length of pets for adoption is: ${petsForAdoption.length}`); // 1
     let temp = petsForAdoption.length - 1;
-    console.log(`The length of temp is: ${temp}`); // 0
+    // console.log(`The length of temp is: ${temp}`); // 0
     // const [currentIndex, setCurrentIndex] = useState(petsForAdoption.length - 1); // -1
     const [currentIndex, setCurrentIndex] = useState(temp); // -1
     const [lastDirection, setLastDirection] = useState();
-    console.log(`The length of pets for adoption is: ${currentIndex}`);
+    // console.log(`The length of pets for adoption is: ${currentIndex}`);
     // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex);
 
@@ -48,8 +51,8 @@ const PetTinderStack = () => {
     //     setCurrentIndex(petsForAdoption.length - 1);
     //     console.log(`INSIDE useEffect: The length of pets for adoption is: ${currentIndex}`);
 
-    //     // eslint-disable-next-line
-    // }, []);
+    // }, [     // eslint-disable-next-line
+    // canS
 
     const childRefs = useMemo(
         () =>
@@ -66,9 +69,9 @@ const PetTinderStack = () => {
 
     // const canGoBack = currentIndex < pets.length - 1;
 
-    console.log(`currentIndex: ${currentIndex}`);
+    // console.log(`currentIndex: ${currentIndex}`);
     const canSwipe = currentIndex >= 0;
-    console.log(`currentIndex: ${canSwipe}`);
+    // console.log(`currentIndex: ${canSwipe}`);
 
     // set last direction and decrease current index
     const swiped = (direction, petToDelete, index) => {
