@@ -12,7 +12,8 @@ const User = require("../models/User");
 // @desc    Update the User's data by adding the liked pet to the user's likedPets array
 // @access  Private
 router.post("/", auth, async (req, res) => {
-    const { animal } = req.body;
+    // console.log("POST /api/like\nAdding liked pet to the user's likedPets array...");
+    const animal = req.body;
     // console.log(animal);
 
     try {
@@ -36,7 +37,7 @@ router.post("/", auth, async (req, res) => {
     } catch (err) {
         // This will tell us a mongoose query error most likely
         console.error(err.message);
-        res.status(500).send("Problem with adding liked pet account.");
+        res.status(500).json({ msg: "Problem with adding liked pet account." });
     }
 });
 
@@ -60,7 +61,7 @@ router.get("/", auth, async (req, res) => {
     } catch (err) {
         // This will tell us a mongoose query error most likely
         console.error(err.message);
-        res.status(500).send("Problem with adding liked pet account.");
+        res.status(500).json({ msg: "Problem with adding liked pet account." });
     }
 });
 
